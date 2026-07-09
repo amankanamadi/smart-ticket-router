@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Smart Ticket Router</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Smart Ticket Router</h1>
+
+<form method="POST">
+
+<textarea
+name="ticket"
+rows="8"
+placeholder="Enter support ticket here...">{{ ticket if ticket else "" }}</textarea>
+
+<br><br>
+
+<button type="submit">
+
+Route Ticket
+
+</button>
+
+</form>
+
+{% if result %}
+
+<div class="result">
+
+<h2>Routing Result</h2>
+
+<p><strong>Category:</strong> {{ result["category"] }}</p>
+
+<p><strong>Priority:</strong> {{ result["priority"] }}</p>
+
+<p><strong>Assigned Team:</strong> {{ result["assigned_team"] }}</p>
+
+<p><strong>Reasoning:</strong> {{ result["reasoning"] }}</p>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+
+</html>
