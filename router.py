@@ -1,4 +1,19 @@
-def route_ticket(ticket):
+from prompts import SYSTEM_PROMPT
+
+def build_prompt(ticket):
+    return f"""
+{SYSTEM_PROMPT}
+
+Support Ticket:
+{ticket}
+"""
+
+
+def classify_ticket(ticket):
+    """
+    Temporary rule-based classifier.
+    This will later be replaced with the OpenAI API.
+    """
 
     ticket = ticket.lower()
 
@@ -41,3 +56,12 @@ def route_ticket(ticket):
             "assigned_team": "Customer Support",
             "reasoning": "The ticket does not match any specific category."
         }
+
+
+def route_ticket(ticket):
+    prompt = build_prompt(ticket)
+
+    print("Prompt Sent to AI")
+    print(prompt)
+
+    return classify_ticket(ticket)
