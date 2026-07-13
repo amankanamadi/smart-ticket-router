@@ -1,7 +1,7 @@
 import json
 import logging
 
-from prompts import SYSTEM_PROMPT
+from prompts import SYSTEM_PROMPT, CATEGORIES, PRIORITIES, TEAMS
 from ai_client import get_ai_response, AIServiceError
 
 logger = logging.getLogger(__name__)
@@ -59,6 +59,14 @@ def route_ticket(ticket):
 
     if not isinstance(result, dict) or not REQUIRED_KEYS.issubset(result):
         logger.warning("AI response missing expected keys: %s", result)
+        return dict(FALLBACK_RESULT)
+
+    if (
+        result["category"] not in CATEGORIES
+        or result["priority"] not in PRIORITIES
+        or result["assigned_team"] not in TEAMS
+    ):
+        logger.warning("AI response contained invalid field values: %s", result)
         return dict(FALLBACK_RESULT)
 
     return result

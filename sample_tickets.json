@@ -1,0 +1,177 @@
+[
+  {
+    "id": 1,
+    "ticket": "I was charged twice for my subscription this month, can you refund the duplicate charge?",
+    "edge_case": null
+  },
+  {
+    "id": 2,
+    "ticket": "My invoice from last month shows the wrong amount, please correct it.",
+    "edge_case": null
+  },
+  {
+    "id": 3,
+    "ticket": "Can I get an itemized receipt for my last three purchases?",
+    "edge_case": null
+  },
+  {
+    "id": 4,
+    "ticket": "I want to update my credit card on file before my subscription renews.",
+    "edge_case": null
+  },
+  {
+    "id": 5,
+    "ticket": "THIS IS THE THIRD TIME YOU'VE CHARGED ME FOR SOMETHING I CANCELED. FIX THIS NOW OR I'M DISPUTING THE CHARGE WITH MY BANK.",
+    "edge_case": "angry"
+  },
+  {
+    "id": 6,
+    "ticket": "The app crashes every time I try to upload a photo larger than 5MB.",
+    "edge_case": null
+  },
+  {
+    "id": 7,
+    "ticket": "I can't log in, it keeps saying 'invalid session' even after I reset my password.",
+    "edge_case": null
+  },
+  {
+    "id": 8,
+    "ticket": "Push notifications stopped working after the last update.",
+    "edge_case": null
+  },
+  {
+    "id": 9,
+    "ticket": "App won't open.",
+    "edge_case": "very_short"
+  },
+  {
+    "id": 10,
+    "ticket": "Your update BROKE everything. I've lost hours of work and support hasn't responded in two days. This is unacceptable.",
+    "edge_case": "angry"
+  },
+  {
+    "id": 11,
+    "ticket": "How do I change the email address linked to my account?",
+    "edge_case": null
+  },
+  {
+    "id": 12,
+    "ticket": "I need to delete my account and all associated data permanently.",
+    "edge_case": null
+  },
+  {
+    "id": 13,
+    "ticket": "Someone else seems to have access to my account, I didn't authorize this login.",
+    "edge_case": null
+  },
+  {
+    "id": 14,
+    "ticket": "Can I merge two accounts I accidentally created with different emails?",
+    "edge_case": null
+  },
+  {
+    "id": 15,
+    "ticket": "It would be great if the app supported dark mode.",
+    "edge_case": null
+  },
+  {
+    "id": 16,
+    "ticket": "Please add the ability to export reports as CSV.",
+    "edge_case": null
+  },
+  {
+    "id": 17,
+    "ticket": "Can you add two-factor authentication via authenticator apps instead of just SMS?",
+    "edge_case": null
+  },
+  {
+    "id": 18,
+    "ticket": "It would be nice if this worked better.",
+    "edge_case": "ambiguous"
+  },
+  {
+    "id": 19,
+    "ticket": "What are your support hours?",
+    "edge_case": null
+  },
+  {
+    "id": 20,
+    "ticket": "Do you offer a student discount?",
+    "edge_case": null
+  },
+  {
+    "id": 21,
+    "ticket": "Is there a mobile app available for this service?",
+    "edge_case": null
+  },
+  {
+    "id": 22,
+    "ticket": "Pricing?",
+    "edge_case": "very_short"
+  },
+  {
+    "id": 23,
+    "ticket": "Why did my plan price increase this cycle without any notice?",
+    "edge_case": null
+  },
+  {
+    "id": 24,
+    "ticket": "Getting a 500 error whenever I try to save my settings.",
+    "edge_case": null
+  },
+  {
+    "id": 25,
+    "ticket": "Locked out.",
+    "edge_case": "very_short"
+  },
+  {
+    "id": 26,
+    "ticket": "It's not working like I expected.",
+    "edge_case": "ambiguous"
+  },
+  {
+    "id": 27,
+    "ticket": "No puedo pagar mi factura, la tarjeta fue rechazada dos veces.",
+    "edge_case": "non_english"
+  },
+  {
+    "id": 28,
+    "ticket": "L'application plante a chaque demarrage sur mon telephone.",
+    "edge_case": "non_english"
+  },
+  {
+    "id": 29,
+    "ticket": "Could you add calendar integration with Google Calendar?",
+    "edge_case": null
+  },
+  {
+    "id": 30,
+    "ticket": "I forgot the answer to my security question, how do I recover access?",
+    "edge_case": null
+  },
+  {
+    "id": 31,
+    "ticket": "I've emailed three times about my issue and NO ONE has responded. Is anyone actually monitoring this inbox?",
+    "edge_case": "angry"
+  },
+  {
+    "id": 32,
+    "ticket": "Refund please.",
+    "edge_case": "very_short"
+  },
+  {
+    "id": 33,
+    "ticket": "Something feels off since the last update but I can't pinpoint it.",
+    "edge_case": "ambiguous"
+  },
+  {
+    "id": 34,
+    "ticket": "Can I downgrade my subscription tier without losing my saved data?",
+    "edge_case": null
+  },
+  {
+    "id": 35,
+    "ticket": "I've been having an intermittent issue for the past week where the dashboard fails to load historical data older than 30 days. It started right after I updated the app to the latest version on both my desktop and mobile devices. Steps to reproduce: 1) Open the dashboard, 2) Select a custom date range spanning more than one month, 3) The loading spinner appears indefinitely and never resolves, forcing me to refresh the page. This happens consistently across Chrome and Safari, and I've already tried clearing my cache and cookies, restarting my router, and logging out and back in, none of which fixed it. I rely on this historical data for monthly reporting to my team, so this is becoming a significant blocker. Please let me know what additional information you need to investigate.",
+    "edge_case": "long"
+  }
+]

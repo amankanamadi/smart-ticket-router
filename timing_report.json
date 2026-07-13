@@ -1,0 +1,292 @@
+{
+  "summary": {
+    "ticket_count": 35,
+    "total_ai_seconds": 51.04,
+    "avg_ai_seconds_per_ticket": 1.46,
+    "total_manual_seconds_estimate": 5600,
+    "avg_manual_seconds_per_ticket": 160.0,
+    "speedup_factor": 109.7
+  },
+  "tickets": [
+    {
+      "id": 1,
+      "edge_case": null,
+      "ai_seconds": 1.974,
+      "manual_seconds_estimate": 150,
+      "category": "Billing",
+      "priority": "High"
+    },
+    {
+      "id": 2,
+      "edge_case": null,
+      "ai_seconds": 1.335,
+      "manual_seconds_estimate": 150,
+      "category": "Billing",
+      "priority": "Medium"
+    },
+    {
+      "id": 3,
+      "edge_case": null,
+      "ai_seconds": 1.239,
+      "manual_seconds_estimate": 150,
+      "category": "Billing",
+      "priority": "Low"
+    },
+    {
+      "id": 4,
+      "edge_case": null,
+      "ai_seconds": 1.442,
+      "manual_seconds_estimate": 150,
+      "category": "Billing",
+      "priority": "Medium"
+    },
+    {
+      "id": 5,
+      "edge_case": "angry",
+      "ai_seconds": 1.461,
+      "manual_seconds_estimate": 200,
+      "category": "Billing",
+      "priority": "High"
+    },
+    {
+      "id": 6,
+      "edge_case": null,
+      "ai_seconds": 1.044,
+      "manual_seconds_estimate": 150,
+      "category": "Technical",
+      "priority": "High"
+    },
+    {
+      "id": 7,
+      "edge_case": null,
+      "ai_seconds": 1.482,
+      "manual_seconds_estimate": 150,
+      "category": "Account",
+      "priority": "High"
+    },
+    {
+      "id": 8,
+      "edge_case": null,
+      "ai_seconds": 1.639,
+      "manual_seconds_estimate": 150,
+      "category": "Technical",
+      "priority": "Medium"
+    },
+    {
+      "id": 9,
+      "edge_case": "very_short",
+      "ai_seconds": 1.19,
+      "manual_seconds_estimate": 60,
+      "category": "Technical",
+      "priority": "High"
+    },
+    {
+      "id": 10,
+      "edge_case": "angry",
+      "ai_seconds": 1.098,
+      "manual_seconds_estimate": 200,
+      "category": "Technical",
+      "priority": "High"
+    },
+    {
+      "id": 11,
+      "edge_case": null,
+      "ai_seconds": 1.294,
+      "manual_seconds_estimate": 150,
+      "category": "Account",
+      "priority": "Low"
+    },
+    {
+      "id": 12,
+      "edge_case": null,
+      "ai_seconds": 1.228,
+      "manual_seconds_estimate": 150,
+      "category": "Account",
+      "priority": "Medium"
+    },
+    {
+      "id": 13,
+      "edge_case": null,
+      "ai_seconds": 1.334,
+      "manual_seconds_estimate": 150,
+      "category": "Account",
+      "priority": "High"
+    },
+    {
+      "id": 14,
+      "edge_case": null,
+      "ai_seconds": 1.125,
+      "manual_seconds_estimate": 150,
+      "category": "Account",
+      "priority": "Low"
+    },
+    {
+      "id": 15,
+      "edge_case": null,
+      "ai_seconds": 3.175,
+      "manual_seconds_estimate": 150,
+      "category": "Feature Request",
+      "priority": "Low"
+    },
+    {
+      "id": 16,
+      "edge_case": null,
+      "ai_seconds": 1.227,
+      "manual_seconds_estimate": 150,
+      "category": "Feature Request",
+      "priority": "Low"
+    },
+    {
+      "id": 17,
+      "edge_case": null,
+      "ai_seconds": 1.13,
+      "manual_seconds_estimate": 150,
+      "category": "Feature Request",
+      "priority": "Low"
+    },
+    {
+      "id": 18,
+      "edge_case": "ambiguous",
+      "ai_seconds": 1.189,
+      "manual_seconds_estimate": 240,
+      "category": "Feature Request",
+      "priority": "Low"
+    },
+    {
+      "id": 19,
+      "edge_case": null,
+      "ai_seconds": 5.249,
+      "manual_seconds_estimate": 150,
+      "category": "General Inquiry",
+      "priority": "Low"
+    },
+    {
+      "id": 20,
+      "edge_case": null,
+      "ai_seconds": 1.343,
+      "manual_seconds_estimate": 150,
+      "category": "Billing",
+      "priority": "Low"
+    },
+    {
+      "id": 21,
+      "edge_case": null,
+      "ai_seconds": 1.228,
+      "manual_seconds_estimate": 150,
+      "category": "General Inquiry",
+      "priority": "Low"
+    },
+    {
+      "id": 22,
+      "edge_case": "very_short",
+      "ai_seconds": 1.228,
+      "manual_seconds_estimate": 60,
+      "category": "Billing",
+      "priority": "Low"
+    },
+    {
+      "id": 23,
+      "edge_case": null,
+      "ai_seconds": 1.134,
+      "manual_seconds_estimate": 150,
+      "category": "Billing",
+      "priority": "Medium"
+    },
+    {
+      "id": 24,
+      "edge_case": null,
+      "ai_seconds": 1.22,
+      "manual_seconds_estimate": 150,
+      "category": "Technical",
+      "priority": "High"
+    },
+    {
+      "id": 25,
+      "edge_case": "very_short",
+      "ai_seconds": 1.126,
+      "manual_seconds_estimate": 60,
+      "category": "Account",
+      "priority": "High"
+    },
+    {
+      "id": 26,
+      "edge_case": "ambiguous",
+      "ai_seconds": 1.332,
+      "manual_seconds_estimate": 240,
+      "category": "Technical",
+      "priority": "Medium"
+    },
+    {
+      "id": 27,
+      "edge_case": "non_english",
+      "ai_seconds": 1.228,
+      "manual_seconds_estimate": 220,
+      "category": "Billing",
+      "priority": "High"
+    },
+    {
+      "id": 28,
+      "edge_case": "non_english",
+      "ai_seconds": 1.126,
+      "manual_seconds_estimate": 220,
+      "category": "Technical",
+      "priority": "High"
+    },
+    {
+      "id": 29,
+      "edge_case": null,
+      "ai_seconds": 1.333,
+      "manual_seconds_estimate": 150,
+      "category": "Feature Request",
+      "priority": "Low"
+    },
+    {
+      "id": 30,
+      "edge_case": null,
+      "ai_seconds": 1.661,
+      "manual_seconds_estimate": 150,
+      "category": "Account",
+      "priority": "Medium"
+    },
+    {
+      "id": 31,
+      "edge_case": "angry",
+      "ai_seconds": 1.263,
+      "manual_seconds_estimate": 200,
+      "category": "General Inquiry",
+      "priority": "High"
+    },
+    {
+      "id": 32,
+      "edge_case": "very_short",
+      "ai_seconds": 1.319,
+      "manual_seconds_estimate": 60,
+      "category": "Billing",
+      "priority": "Medium"
+    },
+    {
+      "id": 33,
+      "edge_case": "ambiguous",
+      "ai_seconds": 1.185,
+      "manual_seconds_estimate": 240,
+      "category": "Technical",
+      "priority": "Medium"
+    },
+    {
+      "id": 34,
+      "edge_case": null,
+      "ai_seconds": 1.128,
+      "manual_seconds_estimate": 150,
+      "category": "Account",
+      "priority": "Low"
+    },
+    {
+      "id": 35,
+      "edge_case": "long",
+      "ai_seconds": 1.328,
+      "manual_seconds_estimate": 300,
+      "category": "Technical",
+      "priority": "Medium"
+    }
+  ]
+}
