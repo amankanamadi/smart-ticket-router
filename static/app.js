@@ -21,7 +21,8 @@
         history: [],
         lastResult: null,
         responseTimes: [],
-        nextId: 1
+        nextId: 1,
+        sampleTickets: []
     };
 
     const el = (id) => document.getElementById(id);
@@ -401,6 +402,141 @@
         URL.revokeObjectURL(url);
     }
 
+    // ---------- Sample ticket library (full 35-ticket dataset) ----------
+    function edgeCaseLabel(edgeCase) {
+        if (!edgeCase) return "normal";
+        return edgeCase.replace("_", " ");
+    }
+
+    function renderSampleLibrary() {
+        const search = el("sampleLibrarySearch").value.trim().toLowerCase();
+        const edgeCaseFilter = el("sampleLibraryEdgeCaseFilter").value;
+
+        const filtered = state.sampleTickets.filter((t) => {
+            if (search && !t.ticket.toLowerCase().includes(search)) return false;
+            if (edgeCaseFilter && t.edge_case !== edgeCaseFilter) return false;
+            return true;
+        });
+
+        if (!filtered.length) {
+            el("sampleLibraryList").innerHTML = '<div class="empty-state"><p>No matching sample tickets.</p></div>';
+            return;
+        }
+
+        el("sampleLibraryList").innerHTML = filtered
+            .map(
+                (t) =>
+                    '<div class="history-item">' +
+                    '<span class="badge badge-team">' + escapeHtml(edgeCaseLabel(t.edge_case)) + "</span>" +
+                    '<span class="history-item-ticket">' + escapeHtml(t.ticket) + "</span>" +
+                    '<button type="button" class="btn btn-ghost btn-sm sample-insert-btn" data-id="' +
+                    t.id +
+                    '">Insert</button>' +
+                    "</div>"
+            )
+            .join("");
+    }
+
+    function insertSampleTicket(id) {
+        const ticket = state.sampleTickets.find((t) => t.id === id);
+        if (!ticket) return;
+        el("ticketInput").value = ticket.ticket;
+        updateCharCount();
+        el("ticketInput").focus();
+        showToast("Sample ticket inserted.", "success");
+    }
+
+    async function loadSampleTicketLibrary() {
+        try {
+            const response = await fetch("/api/sample-tickets");
+            const payload = await response.json();
+            if (!response.ok) {
+                el("sampleLibraryList").innerHTML = '<div class="empty-state"><p>Could not load sample tickets.</p></div>';
+                return;
+            }
+            state.sampleTickets = payload;
+            renderSampleLibrary();
+        } catch (e) {
+            el("sampleLibraryList").innerHTML = '<div class="empty-state"><p>Could not load sample tickets.</p></div>';
+        }
+    }
+
+    // ---------- Manual vs AI benchmark ----------
+    function statTile(value, label) {
+        return (
+            '<div class="stat-tile"><div class="stat-tile-value">' +
+            value +
+            '</div><div class="stat-tile-label">' +
+            label +
+            "</div></div>"
+        );
+    }
+
+    function benchmarkBarRow(label, pct, valueText, kind) {
+        return (
+            '<div class="benchmark-bar-row">' +
+            '<span class="benchmark-bar-label">' + label + "</span>" +
+            '<div class="benchmark-bar-track"><div class="benchmark-bar benchmark-bar--' +
+            kind +
+            '" style="width:' + pct + '%"></div></div>' +
+            '<span class="benchmark-bar-value">' + valueText + "</span>" +
+            "</div>"
+        );
+    }
+
+    function renderBenchmark(summary) {
+        const manualAvg = summary.avg_manual_seconds_per_ticket;
+        const aiAvg = summary.avg_ai_seconds_per_ticket;
+        const aiPct = Math.max(2, Math.min(100, (aiAvg / manualAvg) * 100));
+
+        el("benchmarkResult").innerHTML =
+            '<div class="stat-grid benchmark-stats">' +
+            statTile(summary.ticket_count, "Tickets") +
+            statTile(summary.total_ai_seconds + "s", "Total AI Time") +
+            statTile(summary.total_manual_seconds_estimate + "s", "Total Manual (est.)") +
+            statTile(summary.speedup_factor + "x", "Speedup") +
+            "</div>" +
+            '<div class="benchmark-bars">' +
+            benchmarkBarRow("Manual (est.)", 100, manualAvg.toFixed(1) + "s/ticket", "manual") +
+            benchmarkBarRow("AI (measured)", aiPct, aiAvg.toFixed(2) + "s/ticket", "ai") +
+            "</div>";
+    }
+
+    function setBenchmarkLoading(isLoading) {
+        el("runBenchmarkBtn").disabled = isLoading;
+        el("benchmarkBtnLabel").textContent = isLoading
+            ? "Running (~1 min)..."
+            : "Run Benchmark (35 tickets)";
+        el("benchmarkBtnSpinner").style.display = isLoading ? "inline-block" : "none";
+    }
+
+    async function runBenchmark() {
+        setBenchmarkLoading(true);
+        try {
+            const response = await fetch("/api/benchmark", { method: "POST" });
+
+            let payload;
+            try {
+                payload = await response.json();
+            } catch (parseErr) {
+                showToast("Received an unexpected response from the server.", "error");
+                return;
+            }
+
+            if (!response.ok) {
+                showToast(payload.error || "Benchmark failed to run.", "error");
+                return;
+            }
+
+            renderBenchmark(payload);
+            showToast("Benchmark complete: " + payload.speedup_factor + "x faster than manual.", "success");
+        } catch (networkErr) {
+            showToast("Network failure while running the benchmark.", "error");
+        } finally {
+            setBenchmarkLoading(false);
+        }
+    }
+
     // ---------- Initial server-rendered result (no-JS fallback integration) ----------
     function hydrateInitialState() {
         try {
@@ -447,10 +583,20 @@
         el("downloadJsonBtn").addEventListener("click", downloadJson);
         el("clearHistoryBtn").addEventListener("click", resetHistoryAndAnalytics);
         el("resetAnalyticsBtn").addEventListener("click", resetHistoryAndAnalytics);
+        el("runBenchmarkBtn").addEventListener("click", runBenchmark);
 
         el("historySearch").addEventListener("input", renderHistory);
         el("categoryFilter").addEventListener("change", renderHistory);
         el("priorityFilter").addEventListener("change", renderHistory);
+
+        el("sampleLibrarySearch").addEventListener("input", renderSampleLibrary);
+        el("sampleLibraryEdgeCaseFilter").addEventListener("change", renderSampleLibrary);
+        el("sampleLibraryList").addEventListener("click", (e) => {
+            const btn = e.target.closest(".sample-insert-btn");
+            if (!btn) return;
+            insertSampleTicket(Number(btn.getAttribute("data-id")));
+        });
+        loadSampleTicketLibrary();
 
         hydrateInitialState();
     }

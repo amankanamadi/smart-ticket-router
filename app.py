@@ -1,9 +1,13 @@
+import json
+
 from flask import Flask, render_template, request, jsonify
 from router import route_ticket
+from timing_benchmark import run_benchmark
 
 app = Flask(__name__)
 
 MAX_TICKET_LENGTH = 5000
+SAMPLE_TICKETS_PATH = "sample_tickets.json"
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -61,6 +65,29 @@ def api_route():
     app.logger.info("Routed ticket: %s", result)
 
     return jsonify(result)
+
+
+@app.route("/api/sample-tickets", methods=["GET"])
+def api_sample_tickets():
+    try:
+        with open(SAMPLE_TICKETS_PATH) as f:
+            tickets = json.load(f)
+    except (OSError, ValueError) as e:
+        app.logger.error("Failed to load sample tickets: %s", e)
+        return jsonify({"error": "Could not load sample tickets."}), 500
+
+    return jsonify(tickets)
+
+
+@app.route("/api/benchmark", methods=["POST"])
+def api_benchmark():
+    try:
+        report = run_benchmark()
+    except (OSError, ValueError) as e:
+        app.logger.error("Benchmark run failed: %s", e)
+        return jsonify({"error": "Benchmark failed to run. Check server logs for details."}), 500
+
+    return jsonify(report["summary"])
 
 
 if __name__ == "__main__":

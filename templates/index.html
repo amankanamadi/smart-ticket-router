@@ -139,9 +139,52 @@
                 </div>
             </section>
 
+            <section class="card">
+                <div class="card-header">
+                    <h2>Manual vs AI Timing</h2>
+                </div>
+                <p class="benchmark-caveat">
+                    Runs all 35 sample tickets through the real AI pipeline and compares the
+                    measured time against a documented manual-triage estimate (not measured
+                    from a real agent).
+                </p>
+                <div id="benchmarkResult">
+                    <div class="empty-state">
+                        <p>Not run yet.</p>
+                    </div>
+                </div>
+                <button type="button" id="runBenchmarkBtn" class="btn btn-primary btn-block">
+                    <span id="benchmarkBtnLabel">Run Benchmark (35 tickets)</span>
+                    <span id="benchmarkBtnSpinner" class="spinner" style="display:none"></span>
+                </button>
+            </section>
+
         </div>
 
     </main>
+
+    <section class="card collapsible-card">
+        <div class="card-header card-header--collapsible" data-collapse-target="sampleLibraryBody">
+            <h2>Sample Ticket Library</h2>
+            <button type="button" class="chevron-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        </div>
+        <div id="sampleLibraryBody" class="collapsible-body collapsed">
+            <div class="history-toolbar">
+                <input type="text" id="sampleLibrarySearch" placeholder="Search sample tickets...">
+                <select id="sampleLibraryEdgeCaseFilter">
+                    <option value="">All Types</option>
+                    <option value="angry">Angry</option>
+                    <option value="very_short">Very Short</option>
+                    <option value="ambiguous">Ambiguous</option>
+                    <option value="non_english">Non-English</option>
+                    <option value="long">Long</option>
+                </select>
+            </div>
+            <div id="sampleLibraryList" class="history-list sample-library-list">
+                <div class="empty-state"><p>Loading sample tickets...</p></div>
+            </div>
+        </div>
+    </section>
 
     <section class="buckets-section">
         <h2 class="section-title">Ticket Buckets</h2>
