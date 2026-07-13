@@ -87,6 +87,7 @@
                         <span class="badge badge-category">{{ result["category"] }}</span>
                         <span class="badge badge-priority--{{ result['priority']|lower }}">{{ result["priority"] }} Priority</span>
                         <span class="badge badge-team">{{ result["assigned_team"] }}</span>
+                        <span class="badge badge-tone--{{ result['tone']|lower }}">{{ result["tone"] }} Tone</span>
                     </div>
                     <p class="result-reasoning">{{ result["reasoning"] }}</p>
                     {% else %}

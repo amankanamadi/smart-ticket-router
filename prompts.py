@@ -11,7 +11,8 @@ Schema:
     "category":"",
     "priority":"",
     "assigned_team":"",
-    "reasoning":""
+    "reasoning":"",
+    "tone":""
 }
 
 Rules:
@@ -47,6 +48,18 @@ Account Team
 Product Team
 
 Customer Support
+
+Tone must be one of:
+
+Angry
+
+Frustrated
+
+Neutral
+
+Confused
+
+Tone reflects the customer's emotional state as expressed in the ticket text, not the urgency of the issue.
 
 Reasoning should be one short sentence.
 
@@ -85,4 +98,23 @@ TEAMS = {
     "Account Team",
     "Product Team",
     "Customer Support",
+}
+
+TONES = {"Angry", "Frustrated", "Neutral", "Confused"}
+
+TICKET_JSON_SCHEMA = {
+    "name": "ticket_classification",
+    "strict": True,
+    "schema": {
+        "type": "object",
+        "properties": {
+            "category": {"type": "string", "enum": sorted(CATEGORIES)},
+            "priority": {"type": "string", "enum": sorted(PRIORITIES)},
+            "assigned_team": {"type": "string", "enum": sorted(TEAMS)},
+            "reasoning": {"type": "string"},
+            "tone": {"type": "string", "enum": sorted(TONES)},
+        },
+        "required": ["category", "priority", "assigned_team", "reasoning", "tone"],
+        "additionalProperties": False,
+    },
 }

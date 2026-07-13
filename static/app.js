@@ -112,6 +112,13 @@
         return "badge-priority--low";
     }
 
+    function emotionBadgeClass(tone) {
+        if (tone === "Angry") return "badge-tone--angry";
+        if (tone === "Frustrated") return "badge-tone--frustrated";
+        if (tone === "Confused") return "badge-tone--confused";
+        return "badge-tone--neutral";
+    }
+
     function classifyResultTone(result) {
         if (result.category === "Unknown") {
             if ((result.reasoning || "").includes("AI service unavailable")) return "warning";
@@ -138,6 +145,7 @@
             '<span class="badge badge-category">' + escapeHtml(result.category) + "</span>" +
             '<span class="badge ' + priorityBadgeClass(result.priority) + '">' + escapeHtml(result.priority) + " Priority</span>" +
             '<span class="badge badge-team">' + escapeHtml(result.assigned_team) + "</span>" +
+            '<span class="badge ' + emotionBadgeClass(result.tone) + '">' + escapeHtml(result.tone) + " Tone</span>" +
             "</div>" +
             '<p class="result-reasoning">' + escapeHtml(result.reasoning) + "</p>";
     }
@@ -243,6 +251,7 @@
                     '<span class="badge badge-category">' + escapeHtml(h.category) + "</span>" +
                     '<span class="badge ' + priorityBadgeClass(h.priority) + '">' + escapeHtml(h.priority) + "</span>" +
                     '<span class="badge badge-team">' + escapeHtml(h.assigned_team) + "</span>" +
+                    '<span class="badge ' + emotionBadgeClass(h.tone) + '">' + escapeHtml(h.tone) + "</span>" +
                     '<span class="history-item-ticket">' + escapeHtml(truncate(h.ticket, 90)) + "</span>" +
                     '<span class="history-item-time">' + formatTime(h.time) + "</span>" +
                     "</div>"
@@ -264,6 +273,7 @@
             priority: result.priority,
             assigned_team: result.assigned_team,
             reasoning: result.reasoning,
+            tone: result.tone,
             time: new Date()
         });
         renderAll();
