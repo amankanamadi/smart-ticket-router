@@ -8,7 +8,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 try:
     response = client.chat.completions.create(
-        model="gpt-5.5",
+        model="gpt-4.1-mini",
         messages=[
             {
                 "role": "user",

@@ -50,3 +50,11 @@ button:hover {
 .result p {
     font-size: 16px;
 }
+
+.error {
+    margin-top: 25px;
+    background: #fdf1f0;
+    padding: 20px;
+    border-left: 5px solid #dc3545;
+    color: #842029;
+}

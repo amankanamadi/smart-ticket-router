@@ -35,6 +35,14 @@ Route Ticket
 
 </form>
 
+{% if error %}
+
+<div class="error">
+<p>{{ error }}</p>
+</div>
+
+{% endif %}
+
 {% if result %}
 
 <div class="result">

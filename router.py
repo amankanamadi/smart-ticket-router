@@ -1,67 +1,64 @@
+import json
+import logging
+
 from prompts import SYSTEM_PROMPT
+from ai_client import get_ai_response, AIServiceError
+
+logger = logging.getLogger(__name__)
+
+REQUIRED_KEYS = {"category", "priority", "assigned_team", "reasoning"}
+
+FALLBACK_RESULT = {
+    "category": "Unknown",
+    "priority": "Low",
+    "assigned_team": "Customer Support",
+    "reasoning": "AI returned invalid JSON."
+}
+
 
 def build_prompt(ticket):
+
     return f"""
 {SYSTEM_PROMPT}
 
 Support Ticket:
+
 {ticket}
 """
 
 
-def classify_ticket(ticket):
-    """
-    Temporary rule-based classifier.
-    This will later be replaced with the OpenAI API.
-    """
+def _strip_code_fences(text):
 
-    ticket = ticket.lower()
+    text = text.strip()
 
-    if "refund" in ticket or "payment" in ticket or "charged" in ticket or "invoice" in ticket:
-        return {
-            "category": "Billing",
-            "priority": "High",
-            "assigned_team": "Billing Team",
-            "reasoning": "The ticket is related to payment or billing."
-        }
+    if text.startswith("```"):
+        text = text.split("\n", 1)[1] if "\n" in text else ""
+        if text.endswith("```"):
+            text = text.rsplit("```", 1)[0]
 
-    elif "login" in ticket or "password" in ticket or "account" in ticket:
-        return {
-            "category": "Account",
-            "priority": "Medium",
-            "assigned_team": "Account Team",
-            "reasoning": "The ticket is related to account access."
-        }
-
-    elif "crash" in ticket or "error" in ticket or "bug" in ticket:
-        return {
-            "category": "Technical",
-            "priority": "High",
-            "assigned_team": "Technical Support",
-            "reasoning": "The ticket reports a technical issue."
-        }
-
-    elif "feature" in ticket or "add" in ticket or "dark mode" in ticket:
-        return {
-            "category": "Feature Request",
-            "priority": "Low",
-            "assigned_team": "Product Team",
-            "reasoning": "The customer is requesting a new feature."
-        }
-
-    else:
-        return {
-            "category": "General Inquiry",
-            "priority": "Low",
-            "assigned_team": "Customer Support",
-            "reasoning": "The ticket does not match any specific category."
-        }
+    return text.strip()
 
 
 def route_ticket(ticket):
+
     prompt = build_prompt(ticket)
 
-    print("Prompt Sent to AI")
-    print(prompt)
+    try:
+        response = get_ai_response(prompt)
+    except AIServiceError as e:
+        logger.error("Ticket routing failed: %s", e)
+        return {
+            **FALLBACK_RESULT,
+            "reasoning": "AI service unavailable; ticket needs manual routing."
+        }
 
-    return classify_ticket(ticket)
+    try:
+        result = json.loads(_strip_code_fences(response))
+    except json.JSONDecodeError:
+        return dict(FALLBACK_RESULT)
+
+    if not isinstance(result, dict) or not REQUIRED_KEYS.issubset(result):
+        logger.warning("AI response missing expected keys: %s", result)
+        return dict(FALLBACK_RESULT)
+
+    return result
