@@ -40,10 +40,12 @@
 
         <div class="erp-topbar-right">
             <span class="status-pill" id="aiStatusPill">
-                <span class="status-dot status-dot--ok"></span> AI Ready
+                <span class="status-dot {{ 'status-dot--ok' if ai_configured else 'status-dot--bad' }}"></span>
+                {{ 'AI Ready' if ai_configured else 'AI Not Configured' }}
             </span>
             <span class="status-pill" id="apiStatusPill">
-                <span class="status-dot status-dot--ok"></span> API Connected
+                <span class="status-dot {{ 'status-dot--ok' if ai_configured else 'status-dot--bad' }}"></span>
+                {{ 'API Connected' if ai_configured else 'API Degraded' }}
             </span>
             <span class="erp-datetime" id="erpDateTime">--</span>
             <button type="button" class="icon-btn" id="themeToggle" title="Toggle dark mode">

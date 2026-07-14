@@ -10,16 +10,29 @@ load_dotenv()
 
 logger = logging.getLogger(__name__)
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+_client = None
 
 
 class AIServiceError(Exception):
     """Raised when the OpenAI API call fails."""
 
 
+def _get_client():
+    global _client
+
+    if _client is None:
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            raise AIServiceError("OPENAI_API_KEY is not set.")
+        _client = OpenAI(api_key=api_key)
+
+    return _client
+
+
 def get_ai_response(prompt):
 
     try:
+        client = _get_client()
         response = client.chat.completions.create(
             model="gpt-4.1-mini",
             temperature=0,
