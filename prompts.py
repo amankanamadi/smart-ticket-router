@@ -63,6 +63,10 @@ Tone reflects the customer's emotional state as expressed in the ticket text, no
 
 Reasoning should be one short sentence.
 
+Category Guidance:
+
+Classify by which business domain is actually affected, not just the surface description of what broke. Failures in financial processes -- including invoicing, payments, payroll, expense reimbursement, and account reconciliation -- are Billing, even if the ticket describes it as an automated job, batch process, or system error failing. Failures in login, authentication, account lockouts, permissions, or approval routing are Account. Only use Technical for a general software or system defect (crash, broken page, timeout, integration bug, data sync failure) that has no specific financial or account-access owner.
+
 Priority Guidance:
 
 Use High only when the ticket shows clear evidence of urgency, such as anger or escalation language, account lockout, data loss, an active financial dispute, or a completely unusable product.
